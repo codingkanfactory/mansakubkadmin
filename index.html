@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Sistem Manajemen Poin</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MAN 1 OKU BK POIN</title>
+    <!-- Updated font from Inter to Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -72,7 +73,10 @@
                     <span class="material-icons-round">history</span>
                     Riwayat Kasus
                 </button>
-                <!-- Added manage tab for delete and reset functionality -->
+                <button class="nav-item" data-tab="warning-letter">
+                    <span class="material-icons-round">description</span>
+                    Surat Panggilan
+                </button>
                 <button class="nav-item" data-tab="manage">
                     <span class="material-icons-round">settings</span>
                     Kelola Data
@@ -91,19 +95,22 @@
                         <input type="text" id="studentSearchInput" placeholder="Cari nama siswa...">
                     </div>
                 </div>
-                <div class="table-container">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>UID</th>
-                                <th>Nama Siswa</th>
-                                <th>Poin</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody"></tbody>
-                    </table>
+                <!-- Added responsive table wrapper for horizontal scrolling -->
+                <div class="table-wrapper">
+                    <div class="table-container">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>UID</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Poin</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -187,7 +194,77 @@
                 <div id="caseList" class="case-list"></div>
             </div>
 
-            <!-- Added new manage tab for delete and reset functionality -->
+            <!-- Warning Letter Tab -->
+            <div id="warning-letter-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Surat Panggilan</h2>
+                    <p class="subtitle">Generate surat panggilan berdasarkan poin pelanggaran siswa</p>
+                </div>
+                
+                <div class="warning-info">
+                    <h3>Ketentuan Surat Panggilan:</h3>
+                    <ul>
+                        <li>• SP 1: Poin pelanggaran > 30</li>
+                        <li>• SP 2: Poin pelanggaran > 60</li>
+                        <li>• SP 3: Poin pelanggaran > 90</li>
+                    </ul>
+                </div>
+
+                <div class="settings-container">
+                    <h3>Pengaturan Surat</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="schoolName">Nama Sekolah</label>
+                            <input type="text" id="schoolName" value="SEKOLAH MENENGAH ATAS NEGERI 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="schoolAddress">Alamat Sekolah</label>
+                            <input type="text" id="schoolAddress" value="Jl. Pendidikan No. 123, Kota Pendidikan">
+                        </div>
+                        <div class="form-group">
+                            <label for="principalName">Nama Kepala Sekolah</label>
+                            <input type="text" id="principalName" value="Drs. H. Ahmad Suryadi, M.Pd">
+                        </div>
+                        <div class="form-group">
+                            <label for="principalNIP">NIP Kepala Sekolah</label>
+                            <input type="text" id="principalNIP" value="196501011990031003">
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingDate">Tanggal Pertemuan</label>
+                            <input type="date" id="meetingDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="meetingTime">Jam Pertemuan</label>
+                            <input type="time" id="meetingTime" value="08:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <span class="material-icons-round">search</span>
+                    <input type="text" id="warningSearchInput" placeholder="Cari nama siswa...">
+                </div>
+
+                <!-- Added responsive table wrapper for horizontal scrolling -->
+                <div class="table-wrapper">
+                    <div class="table-container">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama Siswa</th>
+                                    <th>UID</th>
+                                    <th>Poin Saat Ini</th>
+                                    <th>Poin Pelanggaran</th>
+                                    <th>Jenis SP</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="warningTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- Manage Tab -->
             <div id="manage-tab" class="tab-content">
                 <div class="content-header">
@@ -205,20 +282,23 @@
                     <input type="text" id="manageSearchInput" placeholder="Cari nama atau NISN...">
                 </div>
 
-                <div class="table-container">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>Siswa</th>
-                                <th>Poin</th>
-                                <th>Kasus Terakhir</th>
-                                <th>Poin Dikurangi</th>
-                                <th>Diperbarui Oleh</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="manageTableBody"></tbody>
-                    </table>
+                <!-- Added responsive table wrapper for horizontal scrolling -->
+                <div class="table-wrapper">
+                    <div class="table-container">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Siswa</th>
+                                    <th>Poin</th>
+                                    <th>Kasus Terakhir</th>
+                                    <th>Poin Dikurangi</th>
+                                    <th>Diperbarui Oleh</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="manageTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
@@ -242,8 +322,7 @@
         </div>
     </div>
 
-    <!-- Added delete confirmation modal -->
-    <!-- Modal Delete -->
+    <!-- Delete Modal -->
     <div id="deleteModalOverlay" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -264,8 +343,7 @@
         </div>
     </div>
 
-    <!-- Added reset points confirmation modal -->
-    <!-- Modal Reset Points -->
+    <!-- Reset Points Modal -->
     <div id="resetModalOverlay" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -278,7 +356,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="resetValue">Reset poin ke nilai:</label>
-                    <input type="number" id="resetValue" min="0" max="100" value="100" class="form-input">
+                    <input type="number" id="resetValue" min="0" max="100" value="100">
                 </div>
                 <p>Apakah Anda yakin ingin mereset poin semua siswa ke nilai <strong id="resetValueDisplay">100</strong>?</p>
                 <p class="text-warning">Tindakan ini akan mengubah poin semua siswa dan tidak dapat dibatalkan.</p>
@@ -290,6 +368,9 @@
         </div>
     </div>
 
-    <script type="module" src="script.js"></script>
+    <!-- Hidden canvas for generating warning letter images -->
+    <canvas id="warningLetterCanvas" style="display: none;" width="794" height="1123"></canvas>
+
+    <script src="script.js" type="module"></script>
 </body>
 </html>
