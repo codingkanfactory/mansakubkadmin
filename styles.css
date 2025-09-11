@@ -8,12 +8,14 @@
 :root {
   /* Color Palette */
   --primary: #3b82f6;
-  --primary-dark: #2563eb;
-  --secondary: #64748b;
-  --success: #10b981;
+  --primary: #14b8a6;      /* Teal terang */
+  --primary-dark: #0d9488; /* Teal lebih gelap */
+  --secondary: #64748b;    /* Bisa dibiarkan abu-abu */
+  --success: #10b981;      /* Tetap hijau, opsional */
   --warning: #f59e0b;
   --danger: #ef4444;
   --white: #ffffff;
+
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
